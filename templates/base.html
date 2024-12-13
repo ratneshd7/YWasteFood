@@ -18,7 +18,13 @@
       <!-- navbar -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="http://127.0.0.1:8000/">YWasteFood</a>
+          <a class="navbar-brand" href="http://127.0.0.1:8000/">
+            <img
+              src="{% static '/images/logo.jpg' %}"
+              style="height: 30px; width: auto; margin-right: 10px"
+            />
+            YWasteFood</a
+          >
           <button
             class="navbar-toggler"
             type="button"
@@ -145,7 +151,12 @@
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
       © 2024 Copyright:
-      <a class="text-reset fw-bold" href="/">YWasteFood</a>
+      <a class="text-reset fw-bold" href="/"
+        ><img
+          src="{% static '/images/logo.jpg' %}"
+          style="height: 30px; width: auto; margin-right: 10px"
+        />YWasteFood</a
+      >
     </div>
     <!-- Copyright -->
   </footer>
