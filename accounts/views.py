@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from account.decorators import unauthenticated_user, volunteer_coordinator_only
+from accounts.decorators import unauthenticated_user, volunteer_coordinator_only
 from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -44,9 +44,9 @@ def volunteerSignUp(request):
                 request, f'Acoount was successfully created for {username}. Please check your email to activate your account')
 
             # Welcome Email
-            subject = "Welcome to Daanbaksho!!"
+            subject = "Welcome to YWasteFood!!"
             message = "Hello " + user.first_name + "!! \n" + \
-                "Welcome to Daanbaksho!! \nThank you for signing up.\nYou are signed up for a great cause. Your labour contributions will make a difference.\n\n We have received your request to sign up as a volunteer. We will verify your request and get back to you as soon as possible. Keep an eye on your email inbox. We will send you confirmation email after verifying. \n\n\nDaanbaksho Team"
+                "Welcome to YWasteFood!! \nThank you for signing up.\nYou are signed up for a great cause. Your labour contributions will make a difference.\n\n We have received your request to sign up as a volunteer. We will verify your request and get back to you as soon as possible. Keep an eye on your email inbox. We will send you confirmation email after verifying. \n\n\nYWasteFood Team"
             from_email = settings.EMAIL_HOST_USER
             to_list = [user.email]
             send_mail(subject, message, from_email,
@@ -86,9 +86,9 @@ def donorSignUp(request):
                 request, f'Acoount was successfully created for {username}. Please check your email to activate your account')
 
             # Welcome Email
-            subject = "Welcome to Daanbaksho!!"
+            subject = "Welcome to YWasteFood!!"
             message = "Hello " + user.first_name + "!! \n" + \
-                "Welcome to Daanbaksho!!\nThank you for signing up.\nYou are signed up for a great cause.Your donations will make a difference.\n\n We have also sent you a confirmation email, please confirm your email address.\n\n\n\nDaanbaksho Team"
+                "Welcome to YWasteFood!!\nThank you for signing up.\nYou are signed up for a great cause.Your donations will make a difference.\n\n We have also sent you a confirmation email, please confirm your email address.\n\n\n\nYWasteFood Team"
             from_email = settings.EMAIL_HOST_USER
             to_list = [user.email]
             send_mail(subject, message, from_email,
@@ -96,7 +96,7 @@ def donorSignUp(request):
 
             # Email Address Confirmation Email
             current_site = get_current_site(request)
-            email_subject = "Confirm your Email - Daanbaksho"
+            email_subject = "Confirm your Email - YWasteFood"
             message2 = render_to_string('email_confirmation.html',
                                         {
                                             'name': user.first_name,
@@ -185,7 +185,7 @@ def volunteerConfirmation(request):
 
         if request.POST.get("status") == 'Accept':
             current_site = get_current_site(request)
-            email_subject = "Confirm your Email - Daanbaksho"
+            email_subject = "Confirm your Email - YWasteFood"
             message2 = render_to_string('email_confirmation.html',
                                         {
                                             'name': myuser.first_name,
@@ -204,9 +204,9 @@ def volunteerConfirmation(request):
         elif request.POST.get("status") == 'Decline':
             myuser.delete()
 
-            subject = "Request Denied - Daanbaksho"
+            subject = "Request Denied - YWasteFood"
             message = "Hello " + myuser.first_name + "!! \n" + \
-                "We are extremely sorry to inform you that your request to sign up as a volunteer was denied. Please try again later.\n\n\n\nDaanbaksho Team"
+                "We are extremely sorry to inform you that your request to sign up as a volunteer was denied. Please try again later.\n\n\n\nYWasteFood Team"
             from_email = settings.EMAIL_HOST_USER
             to_list = [myuser.email]
             send_mail(subject, message, from_email,
@@ -230,9 +230,9 @@ def volunteerList(request):
         if request.POST.get("status") == 'Terminate':
             myuser.delete()
 
-            subject = "You have been terminated - Daanbaksho"
+            subject = "You have been terminated - YWasteFood"
             message = "Hello " + myuser.first_name + "!! \n" + \
-                "We are extremely sorry to inform you that you have been terminated.\n\n\n\nDaanbaksho Team"
+                "We are extremely sorry to inform you that you have been terminated.\n\n\n\nYWasteFood Team"
             from_email = settings.EMAIL_HOST_USER
             to_list = [myuser.email]
             send_mail(subject, message, from_email,
@@ -246,9 +246,9 @@ def volunteerList(request):
         elif request.POST.get("status") == 'Ban':
             myuser.is_active = False
 
-            subject = "You have been banned - Daanbaksho"
+            subject = "You have been banned - YWasteFood"
             message = "Hello " + myuser.first_name + "!! \n" + \
-                "We are extremely sorry to inform you that you have been banned.\n\n\n\nDaanbaksho Team"
+                "We are extremely sorry to inform you that you have been banned.\n\n\n\nYWasteFood Team"
             from_email = settings.EMAIL_HOST_USER
             to_list = [myuser.email]
             send_mail(subject, message, from_email,

@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% load crispy_forms_tags %} {% block signin
-%}active{% endblock signin %}{% block body %}
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block signin %} active
+{% endblock signin %} {% block body %}
 <h1 class="text-center">Sign In</h1>
 <hr />
 <div class="container">
@@ -13,12 +13,7 @@
             <a class="ml-2" href="{% url 'password_reset' %}">Reset Password</a>
           </small>
         </div>
-        <input
-          class="btn btn-dark mt-5"
-          type="submit"
-          value="Sign In"
-          name="signin"
-        />
+        <input class="btn btn-dark mt-5" type="submit" value="Sign In" name="signin" />
       </form>
 
       <div class="border-top pt-3 mt-5">
