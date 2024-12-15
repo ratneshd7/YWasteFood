@@ -32,7 +32,7 @@ def volunteerSignUp(request):
         if form.is_valid():
             user = form.save(commit=False)
 
-            user.is_active = False
+            user.is_active = True
             user.save()
 
             username = form.cleaned_data.get('username')
@@ -41,16 +41,7 @@ def volunteerSignUp(request):
             user.groups.add(group)
 
             messages.success(
-                request, f'Acoount was successfully created for {username}. Please check your email to activate your account')
-
-            # Welcome Email
-            subject = "Welcome to YWasteFood!!"
-            message = "Hello " + user.first_name + "!! \n" + \
-                "Welcome to YWasteFood!! \nThank you for signing up.\nYou are signed up for a great cause. Your labour contributions will make a difference.\n\n We have received your request to sign up as a volunteer. We will verify your request and get back to you as soon as possible. Keep an eye on your email inbox. We will send you confirmation email after verifying. \n\n\nYWasteFood Team"
-            from_email = settings.EMAIL_HOST_USER
-            to_list = [user.email]
-            send_mail(subject, message, from_email,
-                      to_list, fail_silently=True)
+                request, f'Acoount was successfully created for {username}.')
 
             return redirect('home')
 
@@ -74,7 +65,7 @@ def donorSignUp(request):
         if form.is_valid():
             user = form.save(commit=False)
 
-            user.is_active = False
+            user.is_active = True
             user.save()
 
             username = form.cleaned_data.get('username')
@@ -84,30 +75,6 @@ def donorSignUp(request):
 
             messages.success(
                 request, f'Acoount was successfully created for {username}. Please check your email to activate your account')
-
-            # Welcome Email
-            subject = "Welcome to YWasteFood!!"
-            message = "Hello " + user.first_name + "!! \n" + \
-                "Welcome to YWasteFood!!\nThank you for signing up.\nYou are signed up for a great cause.Your donations will make a difference.\n\n We have also sent you a confirmation email, please confirm your email address.\n\n\n\nYWasteFood Team"
-            from_email = settings.EMAIL_HOST_USER
-            to_list = [user.email]
-            send_mail(subject, message, from_email,
-                      to_list, fail_silently=True)
-
-            # Email Address Confirmation Email
-            current_site = get_current_site(request)
-            email_subject = "Confirm your Email - YWasteFood"
-            message2 = render_to_string('email_confirmation.html',
-                                        {
-                                            'name': user.first_name,
-                                            'domain': current_site.domain,
-                                            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                                            'token': generate_token.make_token(user)
-                                        })
-            email = EmailMessage(email_subject, message2,
-                                 settings.EMAIL_HOST_USER, [user.email])
-            email.fail_silently = True
-            email.send()
 
             return redirect('login')
 
